@@ -1,0 +1,18 @@
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment folders
+env/
+venv/
+g/
+Lib/
+build/
+dist/
+
+# IDE and editor folders
+.vscode/
+*.log
+*.DS_Store
