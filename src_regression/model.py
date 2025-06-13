@@ -17,13 +17,13 @@ def model(X_train,y_train,X_test,y_test):
         'Ridge': Ridge(),
         'Lasso': Lasso(),
         'ElasticNet': ElasticNet(),
-        'RandomForest': RandomForestRegressor(n_estimators=50, max_depth=10, max_features='sqrt', n_jobs=-1, random_state=42),
-        'GradientBoosting': GradientBoostingRegressor(),
-        'ExtraTrees': ExtraTreesRegressor(n_estimators=30, max_depth=10, n_jobs=-1, random_state=42),
+        #'RandomForest': RandomForestRegressor(n_estimators=50, max_depth=10, max_features='sqrt', n_jobs=-1, random_state=42),
+        #'GradientBoosting': GradientBoostingRegressor(),
+        #'ExtraTrees': ExtraTreesRegressor(n_estimators=30, max_depth=10, n_jobs=-1, random_state=42),
         'AdaBoost': AdaBoostRegressor(n_estimators=20, random_state=42),
         'Bagging': BaggingRegressor(n_estimators=20, n_jobs=-1, random_state=42),
         #'SVR': SVR(),
-        'KNN': KNeighborsRegressor(algorithm='ball_tree', n_neighbors=3)
+        #'KNN': KNeighborsRegressor(algorithm='ball_tree', n_neighbors=3)
 
     }
 

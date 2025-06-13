@@ -30,19 +30,11 @@ def preprocessing(X,y):
     X_train = preprocessor.fit_transform(X_train)
     X_test = preprocessor.transform(X_test)
 
-    return X_train,y_train,X_test,y_test
+    return X_train,y_train,X_test,y_test,preprocessor
 
 
 
-# Ensure y_train is 1D
-#if isinstance(y_train, pd.DataFrame) and y_train.shape[1] > 1:
-   # print("y_train columns:", y_train.columns)
-   # y_train = y_train.iloc[:, 0]  # Or choose by name: y_train['target_column_name']
 
-# Ensure y_test is 1D
-#if isinstance(y_test, pd.DataFrame) and y_test.shape[1] > 1:
-    #print("y_test columns:", y_test.columns)
-    #y_test = y_test.iloc[:, 0]  # Or use y_test['TargetColumnName']
 
 
 

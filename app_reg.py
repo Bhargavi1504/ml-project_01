@@ -1,35 +1,46 @@
+# app.py
 from flask import Flask, render_template, request
+import pandas as pd
 import joblib
-import numpy as np
 
 app = Flask(__name__)
 
-# Load the model (trained on 5 features)
-model = joblib.load(r'C:\Users\BHARGAVI\Downloads\advance_ml\best_model_bagging.pkl')
+# Load the full pipeline (preprocessing + model)
+model_pipeline = joblib.load("final_model_pipeline.pkl")
 
 @app.route('/')
 def home():
-    return render_template('index.html', prediction=None)
+    return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
+        # Extract form values
         quantity = float(request.form['Quantity'])
         price = float(request.form['Price'])
         hour = int(request.form['Hour'])
         weekday = int(request.form['Weekday'])
-        price_bin = int(request.form['PriceBin'])
+        pricebin = int(request.form['PriceBin'])
+        desclength = int(request.form['Desclength'])
+        is_return = int(request.form['IsReturn'])
 
-        # Pass only 5 features
-        input_data = np.array([[quantity, price, hour, weekday, price_bin]])
-        prediction = model.predict(input_data)[0]
+        # Create DataFrame with correct column names
+        input_df = pd.DataFrame({
+            'Quantity': [quantity],
+            'Price': [price],
+            'Hour': [hour],
+            'Weekday': [weekday],
+            'PriceBin': [pricebin],
+            'Desclength': [desclength],
+            'IsReturn': [is_return]
+        })
 
-        return render_template('index.html', prediction=f"₹ {round(prediction, 2)}")
+        # Predict using the pipeline
+        prediction = model_pipeline.predict(input_df)[0]
+        return render_template('index.html', prediction_text=f"Predicted Total Amount: ₹ {prediction:.2f}")
 
     except Exception as e:
-        return render_template('index.html', prediction=f"Error: {e}")
+        return render_template('index.html', prediction_text=f"Error: {str(e)}")
 
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)

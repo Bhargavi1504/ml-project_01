@@ -1,21 +1,38 @@
+<!-- templates/index.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Retail Amount Prediction</title>
+    <title>Predict Total Amount</title>
 </head>
-<body>
-    <h1>Predict Total Amount</h1>
-    <form method="POST" action="/predict">
-        Quantity: <input type="text" name="Quantity"><br>
-        Price: <input type="text" name="Price"><br>
-        Hour: <input type="text" name="Hour"><br>
-        Weekday: <input type="text" name="Weekday"><br>
-        PriceBin: <input type="text" name="PriceBin"><br>
+<body style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto;">
+    <h2>🧮 Predict Total Amount</h2>
+    <form action="/predict" method="post">
+        <label>Quantity:</label><br>
+        <input type="number" name="Quantity" step="any" required><br><br>
+
+        <label>Price:</label><br>
+        <input type="number" name="Price" step="any" required><br><br>
+
+        <label>Hour:</label><br>
+        <input type="number" name="Hour" min="0" max="23" required><br><br>
+
+        <label>Weekday (0 = Mon, 6 = Sun):</label><br>
+        <input type="number" name="Weekday" min="0" max="6" required><br><br>
+
+        <label>Price Bin (0 = Low, 1 = High):</label><br>
+        <input type="number" name="PriceBin" min="0" max="1" required><br><br>
+
+        <label>Description Length (Desclength):</label><br>
+        <input type="number" name="Desclength" min="1" required><br><br>
+
+        <label>Is Return (0 = No, 1 = Yes):</label><br>
+        <input type="number" name="IsReturn" min="0" max="1" required><br><br>
+
         <input type="submit" value="Predict">
     </form>
 
-    {% if prediction %}
-        <h2>Predicted Total Amount: {{ prediction }}</h2>
+    {% if prediction_text %}
+        <h3 style="color: green;">{{ prediction_text }}</h3>
     {% endif %}
 </body>
 </html>
