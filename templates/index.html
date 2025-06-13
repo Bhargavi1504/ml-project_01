@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Retail Amount Prediction</title>
+</head>
+<body>
+    <h1>Predict Total Amount</h1>
+    <form method="POST" action="/predict">
+        Quantity: <input type="text" name="Quantity"><br>
+        Price: <input type="text" name="Price"><br>
+        Hour: <input type="text" name="Hour"><br>
+        Weekday: <input type="text" name="Weekday"><br>
+        PriceBin: <input type="text" name="PriceBin"><br>
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction %}
+        <h2>Predicted Total Amount: {{ prediction }}</h2>
+    {% endif %}
+</body>
+</html>
